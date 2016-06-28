@@ -15,7 +15,7 @@ caixabreak
 
 .. image:: https://pyup.io/repos/github/kintoandar/caixabreak/shield.svg
         :target: https://pyup.io/repos/github/kintoandar/caixabreak/
-     :alt: Updates
+        :alt: Updates
 
 
 Extracts data from CGD - Caixa Break management interface
