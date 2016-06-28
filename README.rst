@@ -13,8 +13,8 @@ caixabreak
         :target: https://caixabreak.readthedocs.io/en/latest/?badge=latest
         :alt: Documentation Status
 
-.. image:: https://pyup.io/repos/github/kintoandar/cookiecutter-django/shield.svg
-     :target: https://pyup.io/repos/github/kintoandar/caixabreak/
+.. image:: https://pyup.io/repos/github/kintoandar/caixabreak/shield.svg
+        :target: https://pyup.io/repos/github/kintoandar/caixabreak/
      :alt: Updates
 
 
@@ -23,14 +23,15 @@ Extracts data from CGD - Caixa Break management interface
 
 * Free software: MIT license
 * Documentation: https://caixabreak.readthedocs.io.
+* WIP: New features will be available soonish
 
 
 Features
 --------
 
-* TODO
+* Show current card balance
 
 Credits
 ---------
 
-* TODO
+* `Joel Bastos <https://blog.kintoandar.com/>`_
