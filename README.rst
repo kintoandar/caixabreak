@@ -18,6 +18,7 @@ caixabreak
         :alt: Updates
 
 
+
 * Free software: MIT license
 * Documentation: https://caixabreak.readthedocs.io.
 * Work in progress: New features will be available soon
@@ -31,13 +32,15 @@ Install
 --------
 
 ``pip install caixabreak``
+``caixabreak --help``
 
-Note: You must request the login credentials on a `CGD ATM machine first <https://www.cgd.pt/Particulares/Cartoes/Cartoes-Pre-pagos/Pages/Portal-pre-pagos.aspx>`_.
+**Note:** You must request the login credentials on a `CGD ATM machine<https://www.cgd.pt/Particulares/Cartoes/Cartoes-Pre-pagos/Pages/Portal-pre-pagos.aspx>`_ first.
 
 Features
 --------
 
 * Show current card balance
+* Show table of transactions
 
 Credits
 ---------
