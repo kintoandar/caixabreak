@@ -6,6 +6,7 @@ import requests
 import sys
 import logging
 from lxml import html
+from tabulate import tabulate
 
 """As the CGD page structure might change, this global config should make it easier to adapt."""
 _config = {
@@ -26,7 +27,8 @@ _config = {
         'password': '12345'
     },
     'xpath': {
-        'current_balance': '//*[@id="consultaMovimentosCartoesPrePagos"]/div[4]/div/div/div/div/p[2]/label[1]/text()'
+        'current_balance': '//*[@id="consultaMovimentosCartoesPrePagos"]/div[4]/div/div/div/div/p[2]/label[1]/text()',
+        'transactions_table': '//*[@id="consultaMovimentosCartoesPrePagos"]/div[7]/table'
     }
 }
 
@@ -74,12 +76,29 @@ def current_balance(tree):
     return balance
 
 
+def transactions(tree):
+    """Extracts transactions from the html tree structure and returns a list.
+
+    :param tree: The HTML page
+    """
+    try:
+        rows = tree.xpath(_config['xpath']['transactions_table'])[0].findall("tr")
+        raw_table_data = list()
+        for row in rows[1:-1]:
+            raw_table_data.append([c.text.replace('\n', '') for c in row.getchildren()])
+    except Exception as e:
+        raise e
+    return raw_table_data
+
+
 @click.command()
-@click.option('--username', envvar='CGD_USER', prompt=True,
+@click.option('--username', '-u', envvar='CGD_USER', prompt=True,
               help='Access code for your account (7 digits)')
-@click.option('--password', envvar='CGD_PASS', prompt=True, hide_input=True,
+@click.option('--password', '-p', envvar='CGD_PASS', prompt=True, hide_input=True,
               help='Password for your account (5 digits)')
-def main(username, password):
+@click.option('--query', '-q', default='bal', type=click.Choice(['bal', 'trans']),
+              help='Choose [bal]ance or [trans]actions')
+def main(username, password, query):
     """Extracts data from CGD - Caixa Break management interface.
 
     Optional: Use environment variables instead of command line arguments (CGD_USER and CGD_PASS).
@@ -93,7 +112,11 @@ def main(username, password):
 
     try:
         tree = get_html_tree()
-        click.echo('Current balance: {0}€'.format(current_balance(tree)))
+        if query == 'bal':
+            click.echo('Current balance: {0}€'.format(current_balance(tree)))
+        else:
+            click.echo(tabulate(transactions(tree),
+                       headers=["Date", "Date value", "Description", "Debit", "Credit"]))
     except Exception as e:
         logging.error(e)
         sys.exit(1)
