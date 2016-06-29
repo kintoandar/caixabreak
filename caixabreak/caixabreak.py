@@ -80,7 +80,7 @@ def current_balance(tree):
 @click.option('--password', envvar='CGD_PASS', prompt=True, hide_input=True,
               help='Password for your account (5 digits)')
 def main(username, password):
-    """Extracts data from ``CGD - Caixa Break`` management interface.
+    """Extracts data from CGD - Caixa Break management interface.
 
     Optional: Use environment variables instead of command line arguments (CGD_USER and CGD_PASS).
     """
