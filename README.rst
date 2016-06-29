@@ -18,13 +18,21 @@ caixabreak
         :alt: Updates
 
 
-Extracts data from CGD - Caixa Break management interface
-
-
 * Free software: MIT license
 * Documentation: https://caixabreak.readthedocs.io.
-* WIP: New features will be available soonish
+* Work in progress: New features will be available soon
 
+About
+--------
+
+Extracts data from Caixa Geral de Depositos - Caixa Break management interface.
+
+Install
+--------
+
+``pip install caixabreak``
+
+Note: You must request the login credentials on a `CGD ATM machine first <https://www.cgd.pt/Particulares/Cartoes/Cartoes-Pre-pagos/Pages/Portal-pre-pagos.aspx>`_.
 
 Features
 --------
@@ -35,3 +43,9 @@ Credits
 ---------
 
 * `Joel Bastos <https://blog.kintoandar.com/>`_
+
+
+Disclamer
+---------
+
+This application is not related with CGD in any way.
