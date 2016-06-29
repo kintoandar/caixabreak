@@ -12,7 +12,8 @@ with open('HISTORY.rst') as history_file:
 requirements = [
     'Click>=6.0',
     'lxml>=3.6.0',
-    'requests>=2.10.0'
+    'requests>=2.10.0',
+    'tabulate>=0.7.5'
 ]
 
 test_requirements = [
