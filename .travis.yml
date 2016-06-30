@@ -1,28 +1,17 @@
-# Config file for automatic testing at travis-ci.org
-# This file will be regenerated if you run travis_pypi_setup.py
-
 language: python
 python: 3.5
-
 env:
-  - TOXENV=py27
-  - TOXENV=pypy
-
-# command to install dependencies, e.g. pip install -r requirements.txt --use-mirrors
+- TOXENV=py27
+- TOXENV=pypy
 install: pip install -U tox
-
-# command to run tests, e.g. python setup.py test
 script: tox -e ${TOXENV}
-
-# After you create the Github repo and add it to Travis, run the
-# travis_pypi_setup.py script to finish PyPI deployment setup
 deploy:
   provider: pypi
   distributions: sdist bdist_wheel
   user: kintoandar
   password:
-    secure: X1LTmgK946pverqgoYMQDjE/kNOMVVSwYkJhFCarL2dLdRKOsQH8TbY9HoPsIWobs+EsX/+42sLSvH4IyVh00AmvFS6JMq869nxCfDPey6b6oFXh3ZOmflS39FBmg4yKU3IDV9nmIYp+dT8LEjYV3pdVn6la9mj0QDwcwJQz2AB6o0oarhfS65x2BEXlDo+oQKBY437U2F8LBFU8n66vZByMjdznYbHHagS/jJ65oTHX/fqPnUOzRKqXIYiEHhPa52puHzUHW4GPyV9QgtqItR9cQo++Usn1BaRapt1rs92eWBqGv0K9hx5Om0scjgwmQOvUpEVCFBJJOFTNLaEM+pUHBXUugwC0C3RkaNVuo2u5M1Oj4pYwNlUtn/P7W0QUKBOcui7jMZ7pHW63i0t3IsuC7h0N/7XHHnUdS66nhUJhFX9BuiM4opwDIPnfsChFk/F5ZfypOllSXKRmhqUiRmJ+iVsA8mXeIjfyCGuV2cf4AWb3RJXR4QIGqa63DMYOfcWK5w09+8rpBm5eRLanwP6pqC28BwlV3eIe6eyty3ggyrmWTcLkf+gcBwvX+LEF++2KbmO5cm7Xa8LGhVL/evvF6nrCy04brue8PT9gUuP8QbAtQdcIBFeLi3/dQDX67gcHVMuHnUee7nxxyV5QVAbG44EoKbfa46YNCzIe+Ec=
+    secure: iUwgsEgIFLW3k7l7zf8s2b1B5pWMk9f7fYBVMktoBCOIWnq4F+9L5a89+kWdihXj9WfyhPLKb8vz1fZe2HwuVUFsYkpX5i/aeMEGiemB6AMfm/uB7gRpOPf+cFKQOEgkbsHMd+eFHqVri6sMjTfuXLgNw31qxNbQecfE3ywTU4Z5SvE+A5IDdfMHhGKDSNpO+7975EtOjeg7R+YB5ncDNzegHvYvSmMMfmxUQ49s1HOFJi1XP/sC1IrrJqCtv6lgjxGMngRdJPBWbgy+AvPx3j7Aotj+REOH61B9SrWLnl1BOxcQ6kf5k/SpG8iO0qZBT206j/fX6Xl9ST6esHN6wvOAMwnMhJgtbgBzBPMJFjAYPAU2OWGaJ4OIbixH5YdFnaFT+7on5ZFVcmx/zTr+m4uD5r6pIDQh9sXTmfscEhp21gVJBRLZk7tMt6pk4ZJfMdG+KQTZCU+1ov2OReoI3hz/VQDUIYRl2cT9J2jnU+yEJtbel6QvDPkaNhf3/8MLGmqwz3oT96Ay60Inu41sQMNVE2zEQcI/rOOaZ9QWh6lw5KFBYrGQ9iaMZnzIF+S5BQ1MECUU95lLNZCrwxogD+3/C1RmIKDX8RawADBeucbFA78rc/N5X6gUCl2jK0XkaPMXW7vzuLVZ5lxIXe+CjO5U1HKVHE56gXp65oov9vU=
   on:
     tags: true
     repo: kintoandar/caixabreak
-    condition: $TOXENV == py27
+    condition: "$TOXENV == py27"
