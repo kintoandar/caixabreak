@@ -34,8 +34,7 @@ _config = {
 
 """Setup logging using standard error and level as WARNING."""
 logging.basicConfig(stream=sys.stderr,
-                    level=logging.WARNING,
-                    format='%(levelname)s:%(asctime)s:%(message)s')
+                    level=logging.WARNING)
 
 
 def get_html_tree():
@@ -45,21 +44,11 @@ def get_html_tree():
             s = requests.Session()
             s.get(_config['base_url'] + _config['welcome_page'],
                   data=_config['welcome_credentials'])
-
-            logging.debug('GET {0}'.format(_config['base_url'] +
-                          _config['welcome_page']))
-
             s.post(_config['base_url'] + _config['login_page'],
                    data=_config['login_credentials'])
-
-            logging.debug('POST {0}'.format(_config['base_url'] +
-                          _config['login_page']))
-
             r = s.get(_config['base_url'] + _config['management_page'])
-
-            logging.debug('GET {0}'.format(_config['base_url'] +
-                          _config['login_page']))
     except Exception as e:
+        logging.critical(str(e))
         raise e
     return html.fromstring(r.content)
 
@@ -71,7 +60,9 @@ def current_balance(tree):
     """
     try:
         balance = tree.xpath(_config['xpath']['current_balance'])[0].strip()
+        logging.debug('parsed current_balance xpath as {}'.format(balance))
     except Exception as e:
+        logging.error('def current_balance: {}: '.format(str(e)))
         raise e
     return balance
 
@@ -86,7 +77,9 @@ def transactions(tree):
         raw_table_data = list()
         for row in rows[1:-1]:
             raw_table_data.append([c.text.replace('\n', '') for c in row.getchildren()])
+        logging.debug('parsed transactions_table xpath as {}'.format(raw_table_data))
     except Exception as e:
+        logging.error('def transanctions: {}'.format(str(e)))
         raise e
     return raw_table_data
 
@@ -113,13 +106,22 @@ def main(username, password, query):
     try:
         tree = get_html_tree()
         if query == 'bal':
-            click.echo('Current balance: {0}€'.format(current_balance(tree)))
+            click.secho('\nCurrent balance: {0}€'.format(current_balance(tree)), fg='green')
         else:
-            click.echo(tabulate(transactions(tree),
-                       headers=["Date", "Date value", "Description", "Debit", "Credit"]))
-    except Exception as e:
-        logging.error(e)
+            click.secho('\n' + tabulate(transactions(tree),
+                        headers=["Date", "Date value", "Description", "Debit", "Credit"]),
+                        fg='green')
+    except IndexError:
+        logging.critical('IndexError')
+        click.secho('\n[CRITICAL] Could not parse html data!\n', fg='red')
+        click.secho('* Is the username/password correct?', fg='red')
+        click.secho('* Try enabling debug for more information.', fg='red')
         sys.exit(1)
+    except Exception as e:
+        logging.critical(str(e))
+        click.secho('\n[CRITICAL] That was unexpected 💩\n', fg='red')
+        click.secho('* Try enabling debug for more information.', fg='red')
+        sys.exit(42)
 
 if __name__ == '__main__':
     main()
