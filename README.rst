@@ -35,8 +35,7 @@ Install
 
 ``caixabreak --help``
 
-**Note:**
-You must request the login credentials on a `CGD ATM machine <https://www.cgd.pt/Particulares/Cartoes/Cartoes-Pre-pagos/Pages/Portal-pre-pagos.aspx>`_first.
+Note: You must request the login credentials on a `CGD ATM machine first <https://www.cgd.pt/Particulares/Cartoes/Cartoes-Pre-pagos/Pages/Portal-pre-pagos.aspx>`_.
 
 Features
 --------
