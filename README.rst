@@ -53,6 +53,7 @@ How-to
       -u, --username TEXT      Access code for your account (7 digits)
       -p, --password TEXT      Password for your account (5 digits)
       -q, --query [bal|trans]  Choose [bal]ance or [trans]actions
+      --debug                  Enable debug
       --help                   Show this message and exit.
 
 Features
