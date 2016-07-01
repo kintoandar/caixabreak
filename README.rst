@@ -70,4 +70,4 @@ Credits
 Disclamer
 ---------
 
-This application is not related with CGD in any way.
+This application is not affiliated with CGD in any way.
