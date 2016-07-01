@@ -92,7 +92,9 @@ def transactions(tree):
               help='Password for your account (5 digits)')
 @click.option('--query', '-q', default='bal', type=click.Choice(['bal', 'trans']),
               help='Choose [bal]ance or [trans]actions')
-def main(username, password, query):
+@click.option('--debug', is_flag=True,
+              help='Enable debug')
+def main(username, password, query, debug):
     """Extracts data from CGD - Caixa Break management interface.
 
     Optional: Use environment variables instead of command line arguments (CGD_USER and CGD_PASS).
@@ -105,6 +107,8 @@ def main(username, password, query):
     _config['login_credentials']['password'] = password
 
     try:
+        if debug:
+            logging.getLogger().setLevel(logging.DEBUG)
         tree = get_html_tree()
         if query == 'bal':
             click.secho('\nCurrent balance: {0}€'.format(current_balance(tree)), fg='green')
