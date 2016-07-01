@@ -8,6 +8,11 @@ import logging
 from lxml import html
 from tabulate import tabulate
 
+"""Setup logging using standard error."""
+logging.basicConfig(stream=sys.stderr,
+                    level=logging.CRITICAL)
+
+
 """As the CGD page structure might change, this global config should make it easier to adapt."""
 _config = {
     'base_url': 'https://portalprepagos.cgd.pt/portalprepagos/',
@@ -32,10 +37,6 @@ _config = {
     }
 }
 
-"""Setup logging using standard error and level as WARNING."""
-logging.basicConfig(stream=sys.stderr,
-                    level=logging.WARNING)
-
 
 def get_html_tree():
     """Gets and converts the management interface page into a parsable tree."""
@@ -48,7 +49,7 @@ def get_html_tree():
                    data=_config['login_credentials'])
             r = s.get(_config['base_url'] + _config['management_page'])
     except Exception as e:
-        logging.critical(str(e))
+        logging.error(str(e))
         raise e
     return html.fromstring(r.content)
 
@@ -112,7 +113,6 @@ def main(username, password, query):
                         headers=["Date", "Date value", "Description", "Debit", "Credit"]),
                         fg='green')
     except IndexError:
-        logging.critical('IndexError')
         click.secho('\n[CRITICAL] Could not parse html data!\n', fg='red')
         click.secho('* Is the username/password correct?', fg='red')
         click.secho('* Try enabling debug for more information.', fg='red')
