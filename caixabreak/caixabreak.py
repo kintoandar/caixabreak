@@ -91,7 +91,7 @@ def transactions(tree):
 @click.option('--password', '-p', envvar='CGD_PASS', prompt=True, hide_input=True,
               help='Password for your account (5 digits)')
 @click.option('--query', '-q', default='bal', type=click.Choice(['bal', 'trans']),
-              help='Choose [bal]ance or [trans]actions')
+              help='Choose [bal]ance (default) or [trans]actions')
 @click.option('--debug', is_flag=True,
               help='Enable debug')
 def main(username, password, query, debug):
@@ -111,7 +111,7 @@ def main(username, password, query, debug):
             logging.getLogger().setLevel(logging.DEBUG)
         tree = get_html_tree()
         if query == 'bal':
-            click.secho('\nCurrent balance: {0}€'.format(current_balance(tree)), fg='green')
+            click.secho('\nCurrent balance: {0}'.format(current_balance(tree)), fg='green')
         else:
             click.secho('\n' + tabulate(transactions(tree),
                         headers=["Date", "Date value", "Description", "Debit", "Credit"]),
