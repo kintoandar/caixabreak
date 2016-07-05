@@ -9,16 +9,11 @@ with open('README.rst') as readme_file:
 with open('HISTORY.rst') as history_file:
     history = history_file.read()
 
-requirements = [
-    'Click>=6.0',
-    'lxml>=3.6.0',
-    'requests>=2.10.0',
-    'tabulate>=0.7.5'
-]
+with open('requirements.txt') as req_file:
+    requirements = req_file.readlines()
 
-test_requirements = [
-    # TODO: put package test requirements here
-]
+with open('requirements_dev.txt') as req_dev_file:
+    test_requirements = req_dev_file.readlines()
 
 setup(
     name='caixabreak',
