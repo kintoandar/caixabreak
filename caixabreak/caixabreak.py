@@ -42,7 +42,6 @@ def get_html_tree():
     """Gets and converts the management interface page into a parsable tree."""
     try:
         with requests.Session() as s:
-            s = requests.Session()
             s.get(_config['base_url'] + _config['welcome_page'],
                   data=_config['welcome_credentials'])
             s.post(_config['base_url'] + _config['login_page'],
