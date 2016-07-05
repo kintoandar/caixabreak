@@ -3,7 +3,9 @@ python: 3.5
 env:
 - TOXENV=py27
 - TOXENV=pypy
-install: pip install -U tox
+install:
+  - pip install -U tox
+  - pip install -r requirements_travis.txt
 script: tox -e ${TOXENV}
 deploy:
   provider: pypi
