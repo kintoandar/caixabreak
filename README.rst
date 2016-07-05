@@ -67,6 +67,7 @@ Credits
 ---------
 
 * `Joel Bastos <https://blog.kintoandar.com/>`_
+* `André Ferreira <https://github.com/andreferreirav2/>`_
 
 
 Disclamer

@@ -10,4 +10,4 @@ Development Lead
 Contributors
 ------------
 
-None yet. Why not be the first?
+* André Ferreira <https://github.com/andreferreirav2/>
