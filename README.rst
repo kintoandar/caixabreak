@@ -43,18 +43,19 @@ How-to
 ::
 
     Usage: caixabreak [OPTIONS]
-    
+
       Extracts data from CGD - Caixa Break management interface.
-    
+
       Optional: Use environment variables instead of command line arguments
       (CGD_USER and CGD_PASS).
-    
+
     Options:
-      -u, --username TEXT      Access code for your account (7 digits)
-      -p, --password TEXT      Password for your account (5 digits)
-      -q, --query [bal|trans]  Choose [bal]ance or [trans]actions
-      --debug                  Enable debug
-      --help                   Show this message and exit.
+      -u, --username TEXT  Access code for your account (7 digits)
+      -p, --password TEXT  Password for your account (5 digits)
+      -b, --balance        Show current balance
+      -t, --transactions   Show current transactions
+      --debug              Enable debug
+      --help               Show this message and exit.
 
 Features
 --------
