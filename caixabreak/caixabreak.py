@@ -68,7 +68,7 @@ def current_balance(tree):
     return balance
 
 
-def transactions(tree):
+def current_transactions(tree):
     """Extracts transactions from the html tree structure and returns a list.
 
     :param tree: The HTML page
@@ -90,11 +90,13 @@ def transactions(tree):
               help='Access code for your account (7 digits)')
 @click.option('--password', '-p', envvar='CGD_PASS', prompt=True, hide_input=True,
               help='Password for your account (5 digits)')
-@click.option('--query', '-q', default='bal', type=click.Choice(['bal', 'trans']),
-              help='Choose [bal]ance (default) or [trans]actions')
+@click.option('--balance', '-b', is_flag=True,
+              help='Show current balance')
+@click.option('--transactions', '-t', is_flag=True,
+              help='Show current transactions')
 @click.option('--debug', is_flag=True,
               help='Enable debug')
-def main(username, password, query, debug):
+def main(username, password, balance, transactions, debug):
     """Extracts data from CGD - Caixa Break management interface.
 
     Optional: Use environment variables instead of command line arguments (CGD_USER and CGD_PASS).
@@ -106,16 +108,19 @@ def main(username, password, query, debug):
     _config['login_credentials']['userInput'] = username
     _config['login_credentials']['password'] = password
 
+    if not (balance or transactions):
+        balance = True
+
     try:
         if debug:
             logging.getLogger().setLevel(logging.DEBUG)
         tree = get_html_tree()
-        if query == 'bal':
-            click.secho('\nCurrent balance: {0}'.format(current_balance(tree)), fg='green')
-        else:
-            click.secho('\n' + tabulate(transactions(tree),
+        if transactions:
+            click.secho('\n' + tabulate(current_transactions(tree),
                         headers=["Date", "Date value", "Description", "Debit", "Credit"]),
                         fg='green')
+        if balance:
+            click.secho('\nCurrent balance: {0}'.format(current_balance(tree)), fg='green')
     except IndexError:
         click.secho('\n[CRITICAL] Could not parse html data!\n', fg='red')
         click.secho('* Is the username/password correct?', fg='red')
