@@ -22,7 +22,7 @@ test_requirements = [
 
 setup(
     name='caixabreak',
-    version='0.2.3',
+    version='0.2.4',
     description="Extracts data from CGD - Caixa Break management interface",
     long_description=readme + '\n\n' + history,
     author="Joel Bastos",
